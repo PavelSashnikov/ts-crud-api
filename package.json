@@ -1,0 +1,22 @@
+{
+  "name": "ts-crud-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --loader ts-node/esm src/index.ts",
+    "build": "rimraf ./build && tsc",
+    "start:dev": "npx nodemon",
+    "start:prod": "npm run build && node build/index.js"
+  },
+  "author": "Pavel Sashnikov",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.3.2",
+    "nodemon": "^2.0.22",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.5"
+  }
+}
