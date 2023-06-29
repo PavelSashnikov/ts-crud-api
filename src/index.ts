@@ -1,4 +1,4 @@
-import { server } from './server.ts';
+import { server } from './server.js';
 import 'dotenv/config';
 
 console.log(server);
