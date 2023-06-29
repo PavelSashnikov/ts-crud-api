@@ -1,5 +1,5 @@
-import { server } from './server.js';
+import { serv } from './server.js';
 import 'dotenv/config';
 
-console.log(server);
-console.log(process.env.PORT);
+const port = process.env.PORT || 3000;
+serv.listen(port, () => console.log(`Started on ${port}`));
