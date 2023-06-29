@@ -18,7 +18,7 @@ export const serv = createServer(async (req, res) => {
         case Method.post:
           const createBody = await getBody(req) as ICreateUser;
           const newUser = await UserController.createUser(createBody);
-          createResponse(res, 200, newUser)
+          createResponse(res, 201, newUser)
           break;
         case Method.put:
           const updateBody = await getBody(req);
