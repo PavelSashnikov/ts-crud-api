@@ -25,7 +25,12 @@ export const serv = createServer(async (req, res) => {
           const changedUser = await UserController.updateUser(providedId, updateBody);
           createResponse(res, 200, changedUser)
           break;
+        case Method.del:
+          await UserController.deleteUser(providedId);
+          createResponse(res, 204, 'remove. succeeded')
+          break;
         default:
+          createErrResponse(res, 404, 'unknown method');
           break;
       }
     } catch (err) {

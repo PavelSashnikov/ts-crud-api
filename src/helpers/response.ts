@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { ICreateUser, IUser } from '../interface/user.interface.js';
 
-export function createResponse(res: ServerResponse, status: number, el: IUser | IUser[]) {
+export function createResponse(res: ServerResponse, status: number, el: IUser | IUser[] | string) {
   res.writeHead(status, { 'Content-Type': 'application/json' });
   res.write(JSON.stringify(el));
   res.end();

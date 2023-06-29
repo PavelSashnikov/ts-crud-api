@@ -53,14 +53,17 @@ export class UserController {
     });
   }
 
-  static async deleteUser(id: string) {
+  static async deleteUser(id: string): Promise<string> {
     return new Promise((res, rej) => {
+      if(!uuid.validate(id)){
+        rej(new ResponseErr('id is not valid', 400))
+      }
       const i = USERS_DB.findIndex((el) => el.id === id);
       if (i >= 0) {
         USERS_DB.splice(i, 1);
         res('removed');
       }
-      rej('item not found');
+      rej(new ResponseErr('User not found', 404));
     });
   }
 }
