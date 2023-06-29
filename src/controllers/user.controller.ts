@@ -36,13 +36,20 @@ export class UserController {
 
   static async updateUser(id: string, data: IUpdateUser): Promise<IUser> {
     return new Promise((res, rej) => {
+      if(!uuid.validate(id)){
+        rej(new ResponseErr('id is not valid', 400))
+      }
       const user = USERS_DB.find((el) => el.id === id);
-      if (user && isDataValid({ ...user, ...data })) {
+      const dataIsValid = isDataValid({ ...user, ...data });
+      if(!user) {
+        rej(new ResponseErr('User not found', 404))
+      }
+      if (user && dataIsValid) {
         const i = USERS_DB.findIndex((el) => el.id === id);
         USERS_DB[i] = { ...user, ...data };
         res(USERS_DB[i]);
       }
-      rej('User not found');
+      rej(new ResponseErr('Invalid data', 400));
     });
   }
 
