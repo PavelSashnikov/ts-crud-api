@@ -7,6 +7,7 @@ import { ResponseErr } from './classes/err.js';
 import { ICreateUser } from './interface/user.interface.js';
 
 export const serv = createServer(async (req, res) => {
+  console.log("🚀 ~ request to ", process.env.PORT)
   if (req.url?.startsWith(ENDPOINT)) {
     const providedId = req.url?.replace(ENDPOINT_REG, '');
     try {

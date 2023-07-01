@@ -9,6 +9,7 @@
     "build": "rimraf ./build && tsc",
     "start:dev": "nodemon -e ts --watch src .env --exec \"tsc --incremental && ts-node src/index.ts\"",
     "start:prod": "npm run build && node build/index.js",
+    "start:multi": "nodemon -e ts --watch src .env --exec \"tsc --incremental && ts-node src/index.ts\" multi",
     "lint": "npx eslint"
   },
   "author": "Pavel Sashnikov",
