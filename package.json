@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "build": "rimraf ./build && tsc",
+    "build": "tsc -p tsconfig.json",
     "start:dev": "nodemon -e ts --watch src .env --exec \"tsc --incremental && ts-node src/index.ts\"",
-    "start:prod": "npm run build && node build/index.js",
+    "start:prod": "npm run build && node build/src/index.js",
     "start:multi": "nodemon -e ts --watch src .env --exec \"tsc --incremental && ts-node src/index.ts\" multi",
     "lint": "npx eslint"
   },
@@ -25,7 +25,6 @@
     "jest": "^29.5.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
-    "rimraf": "^5.0.1",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
