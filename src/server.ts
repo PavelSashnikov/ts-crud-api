@@ -37,7 +37,7 @@ export const serv = createServer(async (req, res) => {
       }
     } catch (err) {
       const error = err as ResponseErr;
-      createErrResponse(res, error?.status, error?.message);
+      createErrResponse(res, error?.status, error?.message || undefined);
     }
     process.send?.(DB.users);
   } else {
