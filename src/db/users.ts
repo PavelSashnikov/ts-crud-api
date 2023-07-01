@@ -1,3 +1,3 @@
 import { IUser } from '../interface/user.interface.js';
 
-export const USERS_DB: IUser[] = [];
+export const DB: {users: IUser[]} = {users: []};

@@ -1,4 +1,4 @@
-import { Hobbies, ICreateUser, IUser, UserKeys } from '../interface/user.interface';
+import { Hobbies, IUser, UserKeys } from '../interface/user.interface';
 
 const userDataValidator: Partial<Record<UserKeys, (d: string | number | Hobbies) => boolean>> = {
   username: (d) => !!d && typeof d === 'string',
