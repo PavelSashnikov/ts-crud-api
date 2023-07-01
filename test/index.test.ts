@@ -105,3 +105,34 @@ describe('API random flow', () => {
     await request(server).get(`${ENDPOINT}${person.id}`).expect(404);
   });
 });
+
+describe('API random flow with error status codes', () => {
+  const person: TestUser = {
+    username: 'Vi',
+    age: 23,
+    hobbies: ['snowboadring'],
+  };
+  const randomUuid = '12122f4d-4427-4be9-80f1-09520a40cb3b';
+  let existingId = '';
+  test("should return 404 if user user doesn't exists", async () => {
+    await request(server).delete(`${ENDPOINT}/${randomUuid}`).expect(404);
+  });
+  test('should create person and return 201 if data is valid', async () => {
+    const req = await request(server).post(ENDPOINT).send(person).expect(201);
+    existingId = req.body.id;
+    expect(req.body).toEqual({...person, id: existingId});
+  });
+  test('should c return 400 if request body does not contain required fields', async () => {
+    await request(server).post(ENDPOINT).send({name: 'Alex'}).expect(400);
+  });
+  test('should update user if data is valid', async () => {
+    const newName = 'Phill';
+    const response = await request(server).put(`${ENDPOINT}/${existingId}`).send({ name: newName });
+    expect(response.body).toEqual({ ...person, name: newName, id: existingId });
+  });
+  test('should person remove', async () => {
+    await request(server).delete(`${ENDPOINT}/${existingId}`).expect(204);
+
+    await request(server).get(`${ENDPOINT}${existingId}`).expect(404);
+  });
+});
