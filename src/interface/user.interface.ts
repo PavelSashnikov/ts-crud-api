@@ -1,5 +1,4 @@
 export interface IUser extends ICreateUser {
-  // TODO: add uuid type
   [UserKeys.id]: string;
 }
 
