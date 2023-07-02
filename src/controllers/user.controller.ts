@@ -30,7 +30,7 @@ export class UserController {
         DB.users.push(user);
         res(user);
       }
-      rej(new ResponseErr('Invalid data', 400));
+      rej(new ResponseErr('Invalid incoming data', 400));
     });
   }
 
@@ -40,16 +40,16 @@ export class UserController {
         rej(new ResponseErr('id is not valid', 400))
       }
       const user = DB.users.find((el) => el.id === id);
-      const dataIsValid = isDataValid({ ...user, ...data });
       if(!user) {
         rej(new ResponseErr('User not found', 404))
       }
+      const dataIsValid = isDataValid({ ...data, id: user?.id });
       if (user && dataIsValid) {
         const i = DB.users.findIndex((el) => el.id === id);
         DB.users[i] = { ...user, ...data };
         res(DB.users[i]);
       }
-      rej(new ResponseErr('Invalid data', 400));
+      rej(new ResponseErr('Invalid incoming data', 400));
     });
   }
 

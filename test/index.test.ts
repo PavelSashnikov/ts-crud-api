@@ -39,7 +39,9 @@ describe('simple flow', () => {
   });
   test('should update user', async () => {
     const newName = 'Phill';
-    const response = await request(server).put(`${ENDPOINT}/${userData.id}`).send({ name: newName });
+    const response = await request(server)
+      .put(`${ENDPOINT}/${userData.id}`)
+      .send({ ...userData, name: newName });
     expect(response.body).toEqual({ ...userData, name: newName });
   });
   test('should delete user', async () => {
@@ -120,14 +122,16 @@ describe('API random flow with error status codes', () => {
   test('should create person and return 201 if data is valid', async () => {
     const req = await request(server).post(ENDPOINT).send(person).expect(201);
     existingId = req.body.id;
-    expect(req.body).toEqual({...person, id: existingId});
+    expect(req.body).toEqual({ ...person, id: existingId });
   });
   test('should c return 400 if request body does not contain required fields', async () => {
-    await request(server).post(ENDPOINT).send({name: 'Alex'}).expect(400);
+    await request(server).post(ENDPOINT).send({ name: 'Alex' }).expect(400);
   });
   test('should update user if data is valid', async () => {
     const newName = 'Phill';
-    const response = await request(server).put(`${ENDPOINT}/${existingId}`).send({ name: newName });
+    const response = await request(server)
+      .put(`${ENDPOINT}/${existingId}`)
+      .send({ ...person, name: newName });
     expect(response.body).toEqual({ ...person, name: newName, id: existingId });
   });
   test('should person remove', async () => {
