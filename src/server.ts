@@ -18,6 +18,9 @@ export const serv = createServer(async (req, res) => {
           createResponse(res, 200, users);
           break;
         case Method.post:
+          if(providedId) {
+            createErrResponse(res, 404, 'unknown endpoint');
+          }
           const createBody = (await getBody(req)) as ICreateUser;
           const newUser = await UserController.createUser(createBody);
           createResponse(res, 201, newUser);
