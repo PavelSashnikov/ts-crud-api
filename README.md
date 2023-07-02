@@ -13,7 +13,7 @@ Value of `port` on which application is running should be stored in `.env` file
 - `npm run start:prod` - builds the app and start bundle
 - `npm run start:multi` - starts multiple instances of application
 - `npm run lint` - starts linter
-- `nom run test` - launches test suites
+- `nom run test` - launches test suites. **Server must be started**
 
 ## Usage
 Users are stored as `objects` that have following properties:
